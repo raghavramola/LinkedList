@@ -1,0 +1,40 @@
+//Clone a linked list--by making copy
+----------------------------------------
+
+Node* clone(Node* head)
+{
+Node* temp,*new_head=NULL,*tail=NULL;
+for(Node* curr=head;curr!=NULL;curr=curr->next)
+{
+Node* next=curr->next;
+curr->next = new Node(curr->data);
+curr->next->next=next;
+curr=next;
+}
+for(Node* curr=head;curr!=NULL;curr=curr->next->next)
+{
+curr->next->random = (curr->random!=NULL)?curr->random->next:NULL;
+}
+for(Node* curr=head;curr!=NULL;curr=curr->next)
+{
+temp=curr->next;
+if(new_head==NULL)
+{
+new_head=temp;
+tail=temp;
+}
+else
+{
+tail->next=temp;
+tail=temp;
+}
+curr->next=temp->next;
+}
+return new_head;
+}
+
+
+
+
+
+}

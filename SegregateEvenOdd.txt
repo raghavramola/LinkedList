@@ -1,0 +1,45 @@
+Node* segregate(Node* head)
+{
+
+Node *eS=NULL,*eE=NULL,*oS=NULL,*oE=NULL;
+while(head!=NULL)
+{
+int x = head->key;
+if(x%2==0)
+{
+if(eS==NULL)
+{
+eS=head;
+eE=head;
+}
+else
+{
+eE->next = head;
+eE = head;
+}
+}
+else
+{
+if(oS==NULL)
+{
+oS=head;
+oE=head;
+}
+else
+{
+oE->next=head;
+oE=head;
+}
+}
+head=head->next;
+}
+if(eS==NULL||oS==NULL)
+{
+RETURN null;
+}
+eE->next=oS;
+oE->next = NULL;
+return eS;
+
+}
+

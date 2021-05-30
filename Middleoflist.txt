@@ -1,0 +1,41 @@
+//First approach - two traversals of the list
+-----------------------------------------------------
+
+void middle(Node* head)
+{
+if(head==NULL)
+return;
+Node* temp;
+int count=0;
+for(temp=head;temp!=NULL;temp=temp->next)
+{
+count++;
+}
+temp=head;
+for(int i=0;i<(count/2);i++)
+{
+temp=temp->next;
+}
+cout<<temp->key;
+}
+
+
+
+//Second approach - in 1 traversal-Fast and slow pinters
+----------------------------------------------------------------
+
+void middle(Node* head)
+{
+if(head==NULL)
+return;
+Node* fast;
+Node* slow;
+fast=slow=head;
+while(fast!=NULL||fast->next!NULL)
+{
+slow=slow->next;
+fast = fast->next->next;
+}
+cout<<slow->key;
+}
+	

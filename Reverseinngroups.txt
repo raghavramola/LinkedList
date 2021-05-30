@@ -1,0 +1,61 @@
+//Reverse a list in groups of size k
+-----------------------------------------
+
+Recursive Solution---O(n) ,space- O(n/k)
+--------------------------------------------
+Node* reverse(Node* head,int k)
+{
+Node* curr=head,*next = NULL,*prev=NULL;
+int count=0;
+while(curr!=NULL&&count<k)
+{
+next=curr->next;
+curr->next=prev;
+prev=curr;
+curr=next;
+count++;
+}
+if(next!=NULL)
+{
+Node* rest_head = reverse(next,k);
+head->next = rest_head;
+}
+return prev;
+}
+
+
+
+//Iterative Solution
+-------------------------
+
+Node* reverse(Node* head,int k)
+{
+Node* curr=head,*prevfirst=NULL;
+bool isFirstpass = true;
+while(curr!=NULL)
+{
+Node* first=curr,*prev=NULL;
+int count=0;
+while(curr!=NULL&&count<k)
+{
+next=curr->next;
+curr->next=prev;
+prev=curr;
+curr=next;
+count++;
+}
+
+if(isFirstpass)
+{
+head=prev;
+isFirstpass=false;
+}
+else
+{
+prevFirst->next=prev;
+}
+prevFirst=first;
+}
+return head;
+}
+

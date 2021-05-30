@@ -1,0 +1,10 @@
+//Delete a node with only pointer given to it
+--------------------------------------------------
+
+void delete(Node* ptr)
+{
+Node* tmp = ptr->next;
+ptr->data = temp->data;
+ptr->next=temp->next;
+delete(temp);
+}

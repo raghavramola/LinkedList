@@ -1,0 +1,122 @@
+//Naive solution---------n^2
+----------------------------------
+
+bool loop(Node* head)
+{
+if(head==NULL)
+{
+return False;
+}
+if(head->next==head)
+return true;
+
+Node* temp,*curr;
+curr=head->next;
+
+while(curr!=NULL)
+{
+temp=head;
+while(temp!curr)
+{
+if(curr->next==temp)
+return true;
+
+temp=temp->next;
+}
+curr=curr->next;
+}
+return false;
+}
+
+
+//Second Method - change structure of node---order(n)
+-------------------------------------------------------------
+
+struct Node
+{
+int key;
+Node* next;
+bool visited;
+Node(int n)
+{
+key=n;
+next=NULL;
+visited=false;
+}
+};
+
+bool loop(Node* head)
+{
+
+while(head!=NULL)
+{
+if(head->visited==true)
+return true;
+
+head->visited=true;
+head=head->next;
+}
+return false;
+}
+
+
+
+//Third Method--Modification in list(dummy node)
+-----------------------------------------------------
+
+bool loop(Node* head)
+{
+Node* temp = new Node(5);
+Node* curr=head;
+while(curr!=NULL)
+{
+if(curr->next==NULL)
+return false;
+
+if(curr->next==temp)
+return true;
+
+Node* curr_next = curr->next;
+curr->next=temp;
+curr=curr_next;
+}
+return false;
+}
+
+//Hashing----n time, n space
+-------------------------------
+
+bool loop(Node* head)
+{
+unordered_set<Node*>s;
+for(Node* curr=head;curr!=NULL;curr=curr->next)
+{
+
+if(s.find(curr)!=s.end())
+return true;
+
+s.insert(curr);
+}
+return false;
+}
+
+//Floyd's cycle detection
+------------------------------
+
+bool loop(Node* head)
+{
+Node* fast,*slow;
+slow=head;
+fast=head;
+while(fast!=NULL&&fast->next!=NULL)
+{
+slow=slow->next;
+fast=fast->next->next;
+if(slow==fast)
+return true;
+}
+return false;
+}
+
+
+
